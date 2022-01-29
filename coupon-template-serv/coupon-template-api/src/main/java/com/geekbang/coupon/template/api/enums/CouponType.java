@@ -1,0 +1,41 @@
+package com.geekbang.coupon.template.api.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.stream.Stream;
+
+@Getter
+@AllArgsConstructor
+public enum CouponType {
+
+    UNKNOWN("unknown", "0"),
+    MONEY_OFF("满减券", "1"),
+    DISCOUNT("打折券", "2"),
+    RANDOM_DISCOUNT("随机减", "3"),
+    LONG_NIGHT_MONEY_OFF("寂寞午夜double券", "4"),
+    ANTI_PUA("PUA加倍奉还券", "5");
+
+    private String description;
+
+    private String code;
+
+    /**
+     * 根据优惠券的编码返回对应的枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static CouponType convert(String code) {
+        return Stream.of(values())
+                .filter(couponType -> couponType.code.equalsIgnoreCase(code))
+                .findFirst()
+                .orElse(UNKNOWN);
+    }
+
+    public static void main(String[] args) {
+        CouponType type = CouponType.convert("2");
+        System.out.println(type.description);
+    }
+
+}
