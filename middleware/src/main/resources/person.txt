@@ -1,0 +1,7 @@
+Code,firstName,lastName,age,sex
+1,Chris,Riley,35,man
+2,Harold,Campbell,50,woman
+3,Jessica,Nichols,30,man
+4,Catherine,Brown,40,man
+5,Kelly,Frazier,60,woman
+6,Dennis,Howard,35,man

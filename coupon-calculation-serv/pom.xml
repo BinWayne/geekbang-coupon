@@ -12,6 +12,10 @@
 
     <artifactId>coupon-calculation-serv</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>coupon-calculation-api</module>
+        <module>coupon-calculation-impl</module>
+    </modules>
 
 
 </project>

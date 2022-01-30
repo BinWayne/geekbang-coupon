@@ -1,11 +1,10 @@
 package com.geekbang.coupon.template.service;
 
-import com.geekbang.coupon.template.api.beans.CouponInfo;
+
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
 import com.geekbang.coupon.template.api.beans.TemplateSearchParams;
-import com.geekbang.coupon.template.api.beans.rules.Discount;
-import com.geekbang.coupon.template.api.beans.rules.TemplateRule;
+
 import com.geekbang.coupon.template.api.enums.CouponType;
 import com.geekbang.coupon.template.converter.CouponTemplateConverter;
 import com.geekbang.coupon.template.dao.CouponTemplateDao;
