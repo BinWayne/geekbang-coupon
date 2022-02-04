@@ -139,6 +139,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         // 模板不能过期
         long now = Calendar.getInstance().getTimeInMillis();
         Long expTime = templateInfo.getRule().getDeadline();
+        boolean flag = expTime != null && now >= expTime;
+        boolean flag2 = BooleanUtils.isFalse(templateInfo.getAvailable());
         if (expTime != null && now >= expTime || BooleanUtils.isFalse(templateInfo.getAvailable())) {
             log.error("template is not available id={}", request.getCouponTemplateId());
             throw new IllegalArgumentException("template is unavailable");
@@ -238,5 +240,6 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         coupon.setStatus(CouponStatus.INACTIVE);
         couponDao.save(coupon);
     }
+
 
 }

@@ -71,4 +71,4 @@ spring:
 
 logging:
   level:
-    com.broadview.coupon: debug
+    com.geekbang.coupon: debug
