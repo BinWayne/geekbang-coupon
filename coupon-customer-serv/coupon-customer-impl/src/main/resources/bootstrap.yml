@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: coupon-customer-serv
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+        namespace: dev
+        group: DEFAULT_GROUP
+        #从nacos读取超时
+        timeout: 4000
+        config-long-poll-timeout: 6000
+        config-retry-time: 2
+        refresh-enabled: true
+        extension-configs:
+          - dataId: redis-config.yml
+            group: EXT_GROUP
+            refresh: true
+          - dataId: rabbit-mq.yml
+            group: RABBIT_GROUP
+            refresh: true
+

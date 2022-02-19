@@ -40,6 +40,9 @@ public interface CouponTemplateDao extends JpaRepository<CouponTemplate, Long> {
      */
     Integer countByShopIdAndAvailable(Long shopId, Boolean available);
 
+    @Query("select count(c) from CouponTemplate c")
+    long countCoupon();
+
     /**
      * 将优惠券设置为不可用
      *
@@ -50,4 +53,6 @@ public interface CouponTemplateDao extends JpaRepository<CouponTemplate, Long> {
     @Query("update CouponTemplate c set c.available = 0 where c.id = :id")
     int makeCouponUnavailable(@Param("id") Long id);
 
+    @Override
+    void deleteById(Long aLong);
 }

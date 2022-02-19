@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //用于扫描JPA实体类 @Entity，默认扫本包当下路径
 @EntityScan(basePackages = {"com.geekbang"})
 @LoadBalancerClient(value = "coupon-template-serv", configuration = CanaryRuleConfiguration.class)
-public class Application {
+public class CouponCustomerApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(CouponCustomerApplication.class, args);
     }
 
 

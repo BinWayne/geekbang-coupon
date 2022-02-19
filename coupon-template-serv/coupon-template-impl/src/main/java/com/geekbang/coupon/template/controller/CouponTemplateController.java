@@ -1,5 +1,6 @@
 package com.geekbang.coupon.template.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSON;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
@@ -35,6 +36,7 @@ public class CouponTemplateController {
 
     // 读取优惠券
     @GetMapping("/getTemplate")
+    @SentinelResource("getTemplate")
     public CouponTemplateInfo getTemplate(@RequestParam("id") Long id){
         log.info("Load template, id={}", id);
         return couponTemplateService.loadTemplateInfo(id);

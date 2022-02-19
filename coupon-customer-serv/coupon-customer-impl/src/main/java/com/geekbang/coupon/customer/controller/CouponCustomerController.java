@@ -10,6 +10,8 @@ import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
 import com.geekbang.coupon.template.api.beans.CouponInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,10 +20,14 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("coupon-customer")
+@RefreshScope
 public class CouponCustomerController {
 
     @Autowired
     private CouponCustomerService customerService;
+
+    @Value("${disableCouponRequest:false}")
+    private Boolean disableCoupon;
 
     @PostMapping("requestCoupon")
     public Coupon requestCoupon(@Valid @RequestBody RequestCoupon request) {
@@ -51,6 +57,10 @@ public class CouponCustomerController {
     // 实现的时候最好封装一个search object类
     @PostMapping("findCoupon")
     public List<CouponInfo> findCoupon(@Valid @RequestBody SearchCoupon request) {
+        if(disableCoupon){
+            log.info("can not find coupon");
+            return null;
+        }
         return customerService.findCoupon(request);
     }
 
