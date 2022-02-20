@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 @EnableJpaAuditing
 @ComponentScan(basePackages = {"com.geekbang"})
-public class Application {
+public class CouponTemplateApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(CouponTemplateApplication.class, args);
     }
 }

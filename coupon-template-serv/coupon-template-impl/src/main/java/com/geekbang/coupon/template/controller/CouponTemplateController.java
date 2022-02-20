@@ -6,6 +6,7 @@ import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
 import com.geekbang.coupon.template.api.beans.PagedCouponTemplateInfo;
 import com.geekbang.coupon.template.api.beans.TemplateSearchParams;
 import com.geekbang.coupon.template.service.inf.CouponTemplateService;
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -46,10 +48,23 @@ public class CouponTemplateController {
 
     // 批量获取
     @GetMapping("/getBatch")
+    @SentinelResource(value="getTemplateInBatch",
+            fallback ="getTemplateInBatch_fallback" ,
+            blockHandler = "getTemplateInBatch_block")
     public Map<Long, CouponTemplateInfo> getTemplateInBatch(@RequestParam("ids") Collection<Long> ids) {
         log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
+        throw new RuntimeException();
+//        return couponTemplateService.getTemplateInfoMap(ids);
+    }
 
-        return couponTemplateService.getTemplateInfoMap(ids);
+    public Map<Long, CouponTemplateInfo> getTemplateInBatch_block(@RequestParam("ids") Collection<Long> ids) {
+        log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
+        return null;
+    }
+
+    public Map<Long, CouponTemplateInfo> getTemplateInBatch_fallback(@RequestParam("ids") Collection<Long> ids) {
+        log.info("接口降级");
+        return Maps.newHashMap();
     }
 
     // 搜索模板

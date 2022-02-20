@@ -13,12 +13,12 @@ public class SentinelOriginParser implements RequestOriginParser {
     @Override
     public String parseOrigin(HttpServletRequest httpServletRequest) {
         log.info("request {}, header {}",httpServletRequest.getParameterMap(),httpServletRequest.getHeaderNames());
-        httpServletRequest.getParameterMap().keySet().stream().forEach(el-> System.out.println(el));
-        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-        while(headerNames.hasMoreElements()){
-            String s = headerNames.nextElement();
-            System.out.println(s);
-        }
+//        httpServletRequest.getParameterMap().keySet().stream().forEach(el-> System.out.println(el));
+//        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+//        while(headerNames.hasMoreElements()){
+//            String s = headerNames.nextElement();
+//            System.out.println(s);
+//        }
 
 
         return httpServletRequest.getHeader("SentinelResource");
