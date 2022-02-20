@@ -9,6 +9,8 @@ import com.geekbang.coupon.template.service.inf.CouponTemplateService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
@@ -46,6 +48,7 @@ public class CouponTemplateController {
     @GetMapping("/getBatch")
     public Map<Long, CouponTemplateInfo> getTemplateInBatch(@RequestParam("ids") Collection<Long> ids) {
         log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
+
         return couponTemplateService.getTemplateInfoMap(ids);
     }
 

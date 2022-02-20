@@ -8,6 +8,7 @@ import com.geekbang.coupon.customer.api.beans.SearchCoupon;
 import com.geekbang.coupon.customer.api.enums.CouponStatus;
 import com.geekbang.coupon.customer.dao.CouponDao;
 import com.geekbang.coupon.customer.dao.entity.Coupon;
+import com.geekbang.coupon.customer.feign.TemplateService;
 import com.geekbang.coupon.customer.service.intf.CouponCustomerService;
 import com.geekbang.coupon.template.api.beans.CouponInfo;
 import com.geekbang.coupon.template.api.beans.CouponTemplateInfo;
@@ -39,6 +40,9 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Autowired
     private WebClient.Builder webClientBuilder;
+
+    @Autowired
+    private TemplateService templateService;
 
 
     @Override
@@ -108,6 +112,12 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                 // 设置返回值类型
                 .bodyToMono(new ParameterizedTypeReference<Map<Long, CouponTemplateInfo>>() {})
                 .block();
+//        List<Long> templateIds = coupons.stream()
+//                .map(Coupon::getTemplateId)
+//                .distinct()
+//                .collect(Collectors.toList());
+
+//        Map<Long, CouponTemplateInfo> templateMap = templateService.getTemplateInBatch(templateIds);
 
         coupons.stream().forEach(e -> e.setTemplateInfo(templateMap.get(e.getTemplateId())));
 
@@ -126,6 +136,7 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                 .get()
                 .uri("http://coupon-template-serv/template/getTemplate?id=" + request.getCouponTemplateId())
                 .header(TRAFFIC_VERSION, request.getTrafficVersion())
+                .header("SentinelResource","coupon-customer-serv")
                 .retrieve()
                 .bodyToMono(CouponTemplateInfo.class)
                 .block();
