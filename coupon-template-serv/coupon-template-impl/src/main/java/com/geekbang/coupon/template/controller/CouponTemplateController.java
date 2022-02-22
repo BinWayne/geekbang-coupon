@@ -53,8 +53,8 @@ public class CouponTemplateController {
             blockHandler = "getTemplateInBatch_block")
     public Map<Long, CouponTemplateInfo> getTemplateInBatch(@RequestParam("ids") Collection<Long> ids) {
         log.info("getTemplateInBatch: {}", JSON.toJSONString(ids));
-        throw new RuntimeException();
-//        return couponTemplateService.getTemplateInfoMap(ids);
+//        throw new RuntimeException();
+        return couponTemplateService.getTemplateInfoMap(ids);
     }
 
     public Map<Long, CouponTemplateInfo> getTemplateInBatch_block(@RequestParam("ids") Collection<Long> ids) {

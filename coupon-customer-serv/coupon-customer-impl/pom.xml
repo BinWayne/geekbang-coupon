@@ -43,6 +43,10 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
 
@@ -52,6 +56,16 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 
+        </dependency>
+
+        <!--sleuth-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
         </dependency>
 
 

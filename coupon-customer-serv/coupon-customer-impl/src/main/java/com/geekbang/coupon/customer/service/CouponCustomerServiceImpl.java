@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -99,25 +98,28 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         }
 
         // 获取这些优惠券的模板ID
-        String templateIds = coupons.stream()
-                .map(Coupon::getTemplateId)
-                .map(String::valueOf)
-                .distinct()
-                .collect(Collectors.joining(","));
+//        String templateIds = coupons.stream()
+//                .map(Coupon::getTemplateId)
+//                .map(String::valueOf)
+//                .distinct()
+//                .collect(Collectors.joining(","));
 
         // 发起请求批量查询券模板
-        Map<Long, CouponTemplateInfo> templateMap = webClientBuilder.build().get()
-                .uri("http://coupon-template-serv/template/getBatch?ids=" + templateIds)
-                .retrieve()
-                // 设置返回值类型
-                .bodyToMono(new ParameterizedTypeReference<Map<Long, CouponTemplateInfo>>() {})
-                .block();
-//        List<Long> templateIds = coupons.stream()
-//                .map(Coupon::getTemplateId)
-//                .distinct()
-//                .collect(Collectors.toList());
+//        Map<Long, CouponTemplateInfo> templateMap = webClientBuilder.build().get()
+//                .uri("http://coupon-template-serv/template/getBatch?ids=" + templateIds)
+//                .retrieve()
+//                // 设置返回值类型
+//                .bodyToMono(new ParameterizedTypeReference<Map<Long, CouponTemplateInfo>>() {})
+//                .block();
 
-//        Map<Long, CouponTemplateInfo> templateMap = templateService.getTemplateInBatch(templateIds);
+
+        //by openfeign
+        List<Long> templateIds = coupons.stream()
+                .map(Coupon::getTemplateId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        Map<Long, CouponTemplateInfo> templateMap = templateService.getTemplateInBatch(templateIds);
 
         coupons.stream().forEach(e -> e.setTemplateInfo(templateMap.get(e.getTemplateId())));
 

@@ -6,6 +6,12 @@ server:
 
 
 spring:
+  zipkin:
+    sender:
+      type: rabbit
+    rabbitmq:
+      addresses: 127.0.0.1:5672
+      queue: zipkin
   application:
     name: coupon-customer-serv
 #  datasource:
@@ -68,7 +74,11 @@ spring:
         watch:
           enabled: true
         watch-delay: 30000
-
+  sleuth:
+    sampler:
+      probability: 1.0
+      rate: 1000
 logging:
   level:
     com.geekbang.coupon: debug
+    com.geekbang.coupon.customer.feign.TemplateService: debug

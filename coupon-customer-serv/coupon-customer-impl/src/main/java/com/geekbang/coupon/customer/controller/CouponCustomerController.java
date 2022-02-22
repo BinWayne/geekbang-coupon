@@ -61,6 +61,7 @@ public class CouponCustomerController {
             log.info("can not find coupon");
             return null;
         }
+        log.info("start to find coupon");
         return customerService.findCoupon(request);
     }
 

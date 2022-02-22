@@ -22,7 +22,23 @@
         </dependency>
 
 
+        <!--sleuth-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
         <!-- Nacos服务发现 -->
+
+
 
 
         <dependency>
